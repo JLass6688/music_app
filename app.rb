@@ -85,9 +85,10 @@ end
 get '/api/genres/:genre_id/bands/:id' do 
 
 	content_type :json
-	id = params[:genre_id].to_i
-	genre = Genre.find(id)
-	genre.Band.find(params[:id]).to_json
+	genre_id = params[:genre_id].to_i
+	band_id = params[:id].to_i
+	band = Band.find_by(id: band_id, genre_id: genre_id)
+	band.to_json
 
 end
 
@@ -105,29 +106,31 @@ end
 put '/api/genres/:genre_id/bands/:id' do 
 
 	content_type :json
-	id = params[:genre_id].to_i
-	genre = Genre.find(id)
-	band = genre.Band.find(params[:id].to_i)
-	band.update(params[:band]).to_json
+	genre_id = params[:genre_id].to_i
+	band_id = params[:id].to_i
+	band = Band.find_by(id: band_id, genre_id: genre_id)
+	band.update(params[:band])
+	band.to_json
 
 end
 
 patch '/api/genres/:genre_id/bands/:id' do 
 
 	content_type :json
-	id = params[:genre_id].to_i
-	genre = Genre.find(id)
-	band = genre.Band.find(params[:id].to_i)
-	band.update(params[:band]).to_json
+	genre_id = params[:genre_id].to_i
+	band_id = params[:id].to_i
+	band = Band.find_by(id: band_id, genre_id: genre_id)
+	band.update(params[:band])
+	band.to_json
 
 end
 
 delete '/api/genres/:genre_id/bands/:id' do 
 
 	content_type :json
-	id = params[:genre_id].to_i
-	genre = Genre.find(id)
-	band = genre.Band.find(params[:id].to_i)
+	genre_id = params[:genre_id].to_i
+	band_id = params[:id].to_i
+	band = Band.find_by(id: band_id, genre_id: genre_id)
 	band.delete
 	{message: 'Great Successs'}.to_json
 
